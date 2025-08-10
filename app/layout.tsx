@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { Geist, Geist_Mono } from 'next/font/google';
 
+import Navbar from '@/components/ui/navbar';
 import SplashCursor from '@/components/ui/splash-cursor';
 
 import './globals.css';
@@ -29,6 +30,7 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
+        <Navbar />
         <SplashCursor />
         {children}
       </body>

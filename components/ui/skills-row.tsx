@@ -1,5 +1,6 @@
-import React from "react";
-import { Code, Cpu, Palette, Sparkles } from "lucide-react";
+import React from 'react';
+
+import { Code, Cpu, Palette, Sparkles } from 'lucide-react';
 
 export const SkillsRow = () => {
   const item = (text: string, Icon = Sparkles) => (
@@ -10,13 +11,12 @@ export const SkillsRow = () => {
   );
   return (
     <div className="flex items-center gap-4">
-      {item("TypeScript / React", Code)}
-      {item("Next.js / Tailwind", Palette)}
-      {item("GSAP / Motion", Sparkles)}
-      {item("Performance / DX", Cpu)}
+      {item('TypeScript / Java / Python / Go', Code)}
+      {item('Next.js / Vue / Spring / FastApi', Sparkles)}
+      {item('Figma / Blender / Three.js', Palette)}
+      {item('Pytorch / Langgraph', Cpu)}
     </div>
   );
 };
 
 export default SkillsRow;
-

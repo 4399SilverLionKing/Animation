@@ -1,38 +1,50 @@
-"use client";
+'use client';
 
-import React from "react";
-import clsx from "clsx";
+import React from 'react';
+
+import clsx from 'clsx';
 
 /**
  * Shimmer button inspired by reactbits.
  * - Cold white-blue accent
  * - Works with Tailwind utility classes
  */
-export interface ShimmerButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+export interface ShimmerButtonProps
+  extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   asChild?: boolean;
 }
 
-export const ShimmerButton = ({ className, children, ...props }: ShimmerButtonProps) => {
+export const ShimmerButton = ({
+  className,
+  children,
+  disabled,
+  ...props
+}: ShimmerButtonProps) => {
   return (
     <button
       {...props}
+      disabled={disabled}
       className={clsx(
-        "relative inline-flex items-center justify-center rounded-xl px-5 py-2.5",
-        "font-medium tracking-wide text-sky-50",
+        'relative inline-flex items-center justify-center rounded-xl px-5 py-2.5',
+        'font-medium tracking-wide text-sky-50 transition-all duration-200',
         // glass base
-        "bg-white/10 backdrop-blur-md border border-white/15",
+        'border border-white/15 bg-white/10 backdrop-blur-md',
         // subtle inner highlight
-        "before:absolute before:inset-0 before:rounded-xl before:bg-gradient-to-b before:from-white/20 before:to-transparent before:pointer-events-none",
-        // shimmer
-        "after:absolute after:inset-0 after:rounded-xl after:bg-[linear-gradient(110deg,transparent,rgba(255,255,255,0.45),transparent)] after:-translate-x-full after:animate-[shimmer_2s_infinite] after:pointer-events-none",
-        // hover ring
-        "hover:border-sky-300/40 hover:shadow-[0_0_20px_rgba(56,189,248,0.35)]",
-        // active press
-        "active:scale-[0.98]",
+        'before:pointer-events-none before:absolute before:inset-0 before:rounded-xl before:bg-gradient-to-b before:from-white/20 before:to-transparent',
+        // shimmer (only when not disabled)
+        !disabled &&
+          'after:pointer-events-none after:absolute after:inset-0 after:-translate-x-full after:animate-[shimmer_2s_infinite] after:rounded-xl after:bg-[linear-gradient(110deg,transparent,rgba(255,255,255,0.45),transparent)]',
+        // hover ring (only when not disabled)
+        !disabled &&
+          'hover:border-sky-300/40 hover:shadow-[0_0_20px_rgba(56,189,248,0.35)]',
+        // active press (only when not disabled)
+        !disabled && 'active:scale-[0.98]',
+        // disabled styles
+        disabled && 'cursor-not-allowed opacity-60',
         className
       )}
       style={{
-        WebkitTapHighlightColor: "transparent",
+        WebkitTapHighlightColor: 'transparent',
       }}
     >
       {children}
@@ -44,4 +56,3 @@ export const ShimmerButton = ({ className, children, ...props }: ShimmerButtonPr
 };
 
 export default ShimmerButton;
-

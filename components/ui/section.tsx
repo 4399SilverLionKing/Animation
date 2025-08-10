@@ -27,6 +27,8 @@ export const Section: React.FC<SectionProps> = ({
   const isCenter = align === 'center';
   const sectionClasses = clsx(
     full ? 'h-screen snap-start' : 'py-20 sm:py-28',
+    // Avoid being hidden under the fixed navbar when using hash links
+    'scroll-mt-20 sm:scroll-mt-24',
     center && 'flex flex-col justify-center',
     className
   );

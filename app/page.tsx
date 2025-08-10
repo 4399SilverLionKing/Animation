@@ -1,53 +1,55 @@
 'use client';
 
 import BentoCard from '@/components/ui/bento-card';
-import Footer from '@/components/ui/footer';
 import Hero from '@/components/ui/hero';
 import InfiniteMarquee from '@/components/ui/infinite-marquee';
 import Section from '@/components/ui/section';
 import SkillsRow from '@/components/ui/skills-row';
-import SocialLinks from '@/components/ui/social-links';
 import Timeline, { type TimelineItem } from '@/components/ui/timeline';
 
 export default function Home() {
-  const githubUrl = 'https://github.com/4399SilverLionKing';
-
   const skills = [<SkillsRow key="row" />];
 
   const timeline: TimelineItem[] = [
     {
       title: 'Started coding',
-      period: '2019',
-      description: 'Began exploring web development.',
+      period: '2024-3 ~ 2024-6',
+      description: 'Began exploring web frontend development.',
     },
     {
       title: 'First freelance project',
-      period: '2021',
-      description: 'Delivered a responsive website.',
+      period: '2024-7 ~ 2025-3',
+      description:
+        'Learning backend development and Delivered responsive websites.',
     },
     {
-      title: 'Frontend Engineer',
-      period: '2023 - Now',
-      description: 'Building delightful UIs with React/Next.js.',
+      title: 'AI Exploration',
+      period: '2025-4 ~ Now',
+      description: 'Expoloring and building AI products.',
     },
   ];
 
   // Inline projects data for simplicity
   const projects: { title: string; description?: string; href?: string }[] = [
     {
-      title: 'Portfolio',
-      description: 'Next.js + Tailwind + Motion',
-      href: '#',
+      title: 'MyBlogs',
+      description: 'Vue + Springboot',
+      href: 'http://blogs.sanyeyeye.xyz',
     },
     {
-      title: 'UI Library',
-      description: 'Composable, animated components',
-      href: '#',
+      title: 'MyWeb3D',
+      description: 'Threejs + Nextjs + Tailwind',
+      href: 'https://three.sanyeyeye.xyz',
     },
     {
-      title: 'GSAP Demos',
-      description: 'Micro-interactions and scenes',
-      href: '#',
+      title: 'MyNotes',
+      description: 'Using Nextra Template',
+      href: 'https://notes.sanyeyeye.xyz',
+    },
+    {
+      title: 'ChinaTravel',
+      description: 'Langchain + Nextjs + Springboot',
+      href: 'https://travel.sanyeyeye.xyz',
     },
   ];
 
@@ -105,15 +107,18 @@ export default function Home() {
         <div className="grid grid-cols-1 items-start gap-6 md:grid-cols-2">
           <div className="rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur">
             <p className="text-sm/relaxed text-neutral-200">
-              I’m Asta, a frontend developer passionate about creative UI and
-              motion. I care about performance, polish, and crafting interfaces
-              that feel alive.
+              As a full-stack developer, I bridge the gap between front-end and
+              back-end development. My expertise includes building dynamic user
+              interfaces with Vue/Next.js and developing resilient APIs with
+              Spring/FastApi, delivering complete end-to-end solutions.
             </p>
           </div>
           <div className="rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur">
             <p className="text-sm/relaxed text-neutral-200">
-              Currently focused on React/Next.js, Tailwind, and motion/GSAP.
-              Open to collaborations.
+              My current focus is on AI development. I am leveraging my
+              full-stack foundation to build next-generation applications with
+              technologies like LangGraph and LangChain. I am seeking to apply
+              my skills to create intelligent and impactful AI-powered products.
             </p>
           </div>
         </div>
@@ -123,20 +128,6 @@ export default function Home() {
       <Section id="timeline" eyebrow="Timeline" title="Journey" full center>
         <Timeline items={timeline} />
       </Section>
-
-      {/* Contact */}
-      <Section id="contact" eyebrow="Contact" title="Get in touch" full center>
-        <div className="mx-auto max-w-xl text-center">
-          <p className="text-neutral-300">
-            Feel free to reach out via GitHub or email.
-          </p>
-          <div className="mt-6 flex items-center justify-center gap-3">
-            <SocialLinks githubUrl={githubUrl} />
-          </div>
-        </div>
-      </Section>
-
-      <Footer />
     </main>
   );
 }

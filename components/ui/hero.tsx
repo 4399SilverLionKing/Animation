@@ -1,21 +1,12 @@
 'use client';
 
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useState } from 'react';
 
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { gsap } from 'gsap';
-import { SplitText as GSAPSplitText } from 'gsap/SplitText';
 
 import ShimmerButton from './shimmer-button';
 
-gsap.registerPlugin(GSAPSplitText);
-
 export const Hero: React.FC = () => {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const titleRef = useRef<HTMLHeadingElement>(null);
-  const [isLoaded, setIsLoaded] = useState(false);
-  const [hoveredLetter, setHoveredLetter] = useState<number | null>(null);
-  const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
   const [copyStatus, setCopyStatus] = useState<'idle' | 'copying' | 'copied'>(
     'idle'
   );
@@ -26,122 +17,6 @@ export const Hero: React.FC = () => {
   const { scrollY } = useScroll();
   const fontWeight = useTransform(scrollY, [0, 300], [900, 400]);
   const letterSpacing = useTransform(scrollY, [0, 300], ['0.02em', '0.1em']);
-
-  // 检测用户是否偏好减少动画
-  useEffect(() => {
-    const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
-    setPrefersReducedMotion(mediaQuery.matches);
-
-    const handleChange = (e: MediaQueryListEvent) => {
-      setPrefersReducedMotion(e.matches);
-    };
-
-    mediaQuery.addEventListener('change', handleChange);
-    return () => mediaQuery.removeEventListener('change', handleChange);
-  }, []);
-
-  useEffect(() => {
-    if (!titleRef.current) return;
-
-    const title = titleRef.current;
-
-    // 如果用户偏好减少动画，直接显示静态文本
-    if (prefersReducedMotion) {
-      setIsLoaded(true);
-      return;
-    }
-
-    // 创建 SplitText 实例
-    const splitText = new GSAPSplitText(title, {
-      type: 'chars',
-      charsClass: 'kinetic-char',
-    });
-
-    // 设置初始状态
-    gsap.set(splitText.chars, {
-      opacity: 0,
-      y: 100,
-      rotation: () => gsap.utils.random(-15, 15),
-      scale: 0.8,
-    });
-
-    // 创建进入动画
-    const tl = gsap.timeline({
-      onComplete: () => {
-        setIsLoaded(true);
-        // 添加悬停事件监听器（仅在非减少动画模式下）
-        if (!prefersReducedMotion) {
-          splitText.chars.forEach((char, index) => {
-            char.addEventListener('mouseenter', () => handleLetterHover(index));
-            char.addEventListener('mouseleave', () => handleLetterLeave(index));
-          });
-        }
-      },
-    });
-
-    tl.to(splitText.chars, {
-      opacity: 1,
-      y: 0,
-      rotation: 0,
-      scale: 1,
-      duration: 0.8,
-      ease: 'back.out(1.7)',
-      stagger: {
-        amount: 1.2,
-        from: 'random',
-      },
-    });
-
-    return () => {
-      // 清理事件监听器
-      if (splitText.chars) {
-        splitText.chars.forEach((char, index) => {
-          char.removeEventListener('mouseenter', () =>
-            handleLetterHover(index)
-          );
-          char.removeEventListener('mouseleave', () =>
-            handleLetterLeave(index)
-          );
-        });
-        splitText.revert();
-      }
-    };
-  }, [prefersReducedMotion]);
-
-  const handleLetterHover = (index: number) => {
-    if (!isLoaded) return;
-    setHoveredLetter(index);
-
-    const chars = document.querySelectorAll('.kinetic-char');
-    const targetChar = chars[index];
-
-    if (targetChar) {
-      gsap.to(targetChar, {
-        y: -10,
-        rotation: () => gsap.utils.random(-5, 5),
-        scale: 1.1,
-        duration: 0.3,
-        ease: 'power2.out',
-      });
-    }
-  };
-
-  const handleLetterLeave = (index: number) => {
-    setHoveredLetter(null);
-
-    const chars = document.querySelectorAll('.kinetic-char');
-    const targetChar = chars[index];
-
-    if (targetChar) {
-      gsap.to(targetChar, {
-        y: 0,
-        rotation: 0,
-        scale: 1,
-        duration: 0.4,
-        ease: 'power2.out',
-      });
-    }
-  };
 
   // 复制邮箱到剪切板
   const handleCopyEmail = async () => {
@@ -169,22 +44,22 @@ export const Hero: React.FC = () => {
   };
 
   return (
-    <div
-      ref={containerRef}
-      className="relative flex min-h-screen items-center justify-center overflow-hidden"
-    >
+    <div className="relative flex min-h-screen items-center justify-center overflow-hidden">
       <div className="relative z-10 mx-auto max-w-7xl px-6 text-center">
         {/* 主标题 - Kinetic Typography */}
         <motion.h1
-          ref={titleRef}
           style={{
-            fontWeight: prefersReducedMotion ? 900 : fontWeight,
-            letterSpacing: prefersReducedMotion ? '0.02em' : letterSpacing,
+            fontWeight: fontWeight,
+            letterSpacing: letterSpacing,
           }}
-          className={`mb-8 cursor-default text-6xl leading-none font-black select-none md:text-8xl lg:text-9xl ${
-            prefersReducedMotion ? 'text-white' : 'text-texture'
-          }`}
-          data-text="HELLO, I'M ASTA."
+          className="text-texture mb-8 cursor-default text-6xl leading-none font-black select-none md:text-8xl lg:text-9xl"
+          initial={{ opacity: 0, y: 50 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{
+            duration: 1.2,
+            ease: [0.25, 0.46, 0.45, 0.94],
+            delay: 0.2,
+          }}
         >
           HELLO, I'M ASTA.
         </motion.h1>

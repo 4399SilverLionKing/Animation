@@ -5,6 +5,7 @@ import Hero from '@/components/ui/hero';
 import InfiniteMarquee from '@/components/ui/infinite-marquee';
 import Section from '@/components/ui/section';
 import SkillsRow from '@/components/ui/skills-row';
+import SpotlightCard from '@/components/ui/spotlight-card';
 import Timeline, { type TimelineItem } from '@/components/ui/timeline';
 
 export default function Home() {
@@ -105,21 +106,33 @@ export default function Home() {
         center
       >
         <div className="grid grid-cols-1 items-start gap-6 md:grid-cols-2">
-          <div className="rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur">
-            <p className="text-sm/relaxed text-neutral-200">
-              As a full-stack developer, I bridge the gap between front-end and
-              back-end development. My expertise includes building dynamic user
-              interfaces with Vue/Next.js and developing resilient APIs with
-              Spring/FastApi, delivering complete end-to-end solutions.
-            </p>
+          <div className="borderp-6 rounded-2xl backdrop-blur">
+            <SpotlightCard
+              spotlightColor="rgba(0, 229, 255, 0.2)"
+              className="border-white/10 bg-white/5"
+            >
+              <p className="text-sm/relaxed text-neutral-200">
+                As a full-stack developer, I bridge the gap between front-end
+                and back-end development. My expertise includes building dynamic
+                user interfaces with Vue/Next.js and developing resilient APIs
+                with Spring/FastApi, delivering complete end-to-end solutions.
+              </p>
+            </SpotlightCard>
           </div>
-          <div className="rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur">
-            <p className="text-sm/relaxed text-neutral-200">
-              My current focus is on AI development. I am leveraging my
-              full-stack foundation to build next-generation applications with
-              technologies like LangGraph and LangChain. I am seeking to apply
-              my skills to create intelligent and impactful AI-powered products.
-            </p>
+
+          <div className="borderp-6 rounded-2xl backdrop-blur">
+            <SpotlightCard
+              spotlightColor="rgba(0, 229, 255, 0.2)"
+              className="border-white/10 bg-white/5"
+            >
+              <p className="text-sm/relaxed text-neutral-200">
+                My current focus is on AI development. I am leveraging my
+                full-stack foundation to build next-generation applications with
+                technologies like LangGraph and LangChain. I am seeking to apply
+                my skills to create intelligent and impactful AI-powered
+                products.
+              </p>
+            </SpotlightCard>
           </div>
         </div>
       </Section>

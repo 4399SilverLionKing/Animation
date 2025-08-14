@@ -14,7 +14,7 @@ export const SkillsRow = () => {
       {item('TypeScript / Java / Python / Go', Code)}
       {item('Next.js / Vue / Spring / FastApi', Sparkles)}
       {item('Figma / Blender / Three.js', Palette)}
-      {item('Pytorch / Langgraph', Cpu)}
+      {item('FineTune / Langgraph', Cpu)}
     </div>
   );
 };

@@ -1,6 +1,7 @@
 'use client';
 
 import BentoCard from '@/components/ui/bento-card';
+import Footer from '@/components/ui/footer';
 import Hero from '@/components/ui/hero';
 import InfiniteMarquee from '@/components/ui/infinite-marquee';
 import Section from '@/components/ui/section';
@@ -141,6 +142,9 @@ export default function Home() {
       <Section id="timeline" eyebrow="Timeline" title="Journey" full center>
         <Timeline items={timeline} />
       </Section>
+
+      {/* Footer */}
+      <Footer />
     </main>
   );
 }
